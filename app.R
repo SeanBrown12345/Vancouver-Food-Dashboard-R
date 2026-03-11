@@ -35,11 +35,6 @@ ui <- page_sidebar(
     ),
     
     value_box(
-      "Free Programs (%)",
-      textOutput("free_prop")
-    ),
-    
-    value_box(
       "Accessibility (%)",
       textOutput("accessibility_prop")
     )
@@ -69,13 +64,6 @@ server <- function(input, output, session) {
   
   output$total_locations <- renderText({
     nrow(filtered_df())
-  })
-  
-  output$free_prop <- renderText({
-    dff <- filtered_df()
-    if (nrow(dff) == 0) return("0%")
-    prop <- mean(tolower(dff$meal_cost) == "free")
-    paste0(round(prop * 100, 1), "%")
   })
   
   output$accessibility_prop <- renderText({
